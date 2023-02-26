@@ -21,9 +21,9 @@ const refs = {
 
 const photoApiService = new PhotoApiService();
 
-const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt',
-        captionPosition: 'bottom',
-        captionDelay: '250ms' });
+// const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt',
+//         captionPosition: 'bottom',
+//         captionDelay: '250ms' });
 
 
 refs.form.addEventListener('submit', onFormSumbit);
@@ -44,7 +44,7 @@ function onFormSumbit(evt) {
     
     photoApiService.fetchPhoto().then(markUp);
     lightbox.refresh();
-    
+    lightbox.show.simplelightbox();    
     
 
     
@@ -53,40 +53,54 @@ function onFormSumbit(evt) {
 }
 
 function onLoadMoreBtn() {
-    lightbox.refresh();
+    // lightbox.refresh();
     photoApiService.fetchPhoto().then(markUp); 
     
 }
 
 function markUp(hits) {
     const renderGallery = hits.map(({largeImageURL, webformatURL, tags, likes, views, comments, downloads})=>
-        `<div class="photo-card">
-        <a class="gallery__link" href="${largeImageURL}">
+        `<a class="gallery__link" href="${largeImageURL}">
+        <div class="photo-card">
         <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" width="100px" />
+       
         <div class="info">
             <p class="info-item">
-            <b>${likes} Likes</b>
+            <b>Likes</b>
+            ${likes} 
             </p>
             <p class="info-item">
-            <b>${views} Views</b>
+            <b>Views</b>
+            ${views}
             </p>
             <p class="info-item">
-            <b>${comments} Comments</b>
+            <b> Comments</b>
+            ${comments}
             </p>
             <p class="info-item">
-            <b>${downloads} Downloads</b>
+            <b> Downloads</b>
+            ${downloads}
             </p>
+        </div> 
         </div>
-         </a>
-        </div>`).join(' ');
+        </a>`).join(' ');
     
     refs.gallery.insertAdjacentHTML('beforeend', renderGallery);
 
+    lightbox()
    
 
     
 }
 
+
+function lightbox() {
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+    overlayOpacity: 0.7,
+  });
+}
 
 
 
