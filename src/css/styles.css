@@ -26,8 +26,6 @@
     background-color: lightcyan;;
 } */
 
-
-
 .button{
 background-color: aquamarine;
 border: none;
@@ -65,6 +63,13 @@ color: darkslategrey;
 .load-more:focus {
     color: aliceblue;
         background-color: darkslategrey;
+}
+
+.load-more-container{
+display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .gallery {

@@ -19,6 +19,7 @@ const refs = {
 
 // const KEY = '33939890-a3090e3aada617e55ee2e122d';
 
+
 const photoApiService = new PhotoApiService();
 
 refs.form.addEventListener('submit', onFormSumbit);
@@ -35,7 +36,7 @@ async function onFormSumbit(evt) {
     // const name = refs.input.value;
     // console.log(name);
 
-    photoApiService.query = evt.currentTarget.elements.searchQuery.value;
+    photoApiService.query = evt.currentTarget.elements.searchQuery.value.trim();
 
     if (photoApiService.query === '') {
         return Notiflix.Notify.failure(
@@ -59,7 +60,13 @@ async function onFormSumbit(evt) {
                 `Hooray! We found ${data.totalHits} images.`
             );
             markup(data.hits);
-            refs.loadMoreBtn.classList.remove('is-hidden');
+
+            if (data.totalHits<40) {
+                refs.loadMoreBtn.classList.add('is-hidden');
+            } else {
+                refs.loadMoreBtn.classList.remove('is-hidden');
+            }
+            
         }
         
     } catch (error) {
@@ -103,6 +110,15 @@ try {
     };
     
     markup(data.hits);
+
+    const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
 
 } catch (error) {
     console.log(error);
