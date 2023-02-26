@@ -42,6 +42,14 @@ color: darkslategrey;
     background-color: darkslategrey;
 }
 
+/* .unavailable{
+    cursor: not-allowed;
+}
+
+.unavailable .button:hover{
+    cursor: not-allowed;
+} */
+
 .load-more { 
     margin-right: auto;
     margin-left: auto;
@@ -118,4 +126,8 @@ color: darkslategrey;
     align-items: center;
     margin-left: 15px;
     color: black;
+}
+
+.is-hidden {
+    display: none;
 }

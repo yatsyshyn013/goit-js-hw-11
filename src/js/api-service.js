@@ -1,3 +1,5 @@
+import Notiflix from 'notiflix';
+
 export default class ApiService {
     constructor() {
         this.searchQuery = '';
@@ -17,7 +19,11 @@ export default class ApiService {
             .then(data => {
                 this.page += 1;
 
-                return data.hits;
+                console.log(data);
+
+    
+
+                return data;
 
             });
     };
